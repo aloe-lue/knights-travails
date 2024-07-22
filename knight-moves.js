@@ -45,7 +45,7 @@ const getKnightMoves = (coordinate) => {
   ];
 };
 
-const removeOverTheBoardMove = (knightPossibleMoves) => {
+const removeOverTheBoardMoves = (knightPossibleMoves) => {
   const moves = knightPossibleMoves;
   return moves.filter(
     (element) =>
@@ -64,36 +64,21 @@ const translateAllCoordinatesToNumbers = (arrayOfCoordinates) => {
 };
 
 const createChessBoardGraphForKnight = () => {
-  let squares = [];
+  const chessCoordinates = createChessCoordinates();
 
-  createChessCoordinates().forEach((element, index) => {
+  return chessCoordinates.map((element) => {
     let item = element;
-
     const knightMovements = getKnightMoves(item);
-    const filteredKnightMovements = removeOverTheBoardMove(knightMovements);
-
-    const arrayOfIndexesFilteredKnightMovements =
-      translateAllCoordinatesToNumbers(filteredKnightMovements);
-
-    const sortArrayOfIndexesFilteredKnightMovements = mergeSort(
-      arrayOfIndexesFilteredKnightMovements,
-      0,
-      arrayOfIndexesFilteredKnightMovements.length - 1
-    );
-
-    squares[index] = bst.buildTree(
-      sortArrayOfIndexesFilteredKnightMovements,
-      0,
-      sortArrayOfIndexesFilteredKnightMovements.length - 1
-    );
+    const removeMoves = removeOverTheBoardMoves(knightMovements);
+    const translateToNum = translateAllCoordinatesToNumbers(removeMoves);
+    const sortMoves = mergeSort(translateToNum, 0, translateToNum.length - 1);
+    item = bst.buildTree(sortMoves, 0, sortMoves.length - 1);
+    return item;
   });
-
-  return squares;
 };
 
-const knightMoves = (from, to) => {};
+const graphChess = createChessBoardGraphForKnight();
 
-/**
- * decide what search algorithm to use, remember that
- * one of them could be potentially infinite series
- */
+const knightMoves = (from, to) => {
+  // translate the from to num and to to num
+};
