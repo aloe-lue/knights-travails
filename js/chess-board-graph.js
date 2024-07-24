@@ -1,8 +1,9 @@
-import binarySearchTree from "./binary-search-tree";
-import getKnightMoves from "./get-knight-moves";
-import mergeSort from "./merge-sort";
-import removeOverTheBoardMoves from "./remove-over-the-board-moves";
-import translateAllCoordinatesToNumbers from "./translate-all-coordinates-to-numbers";
+import binarySearchTree from "./binary-search-tree.js";
+import getKnightMoves from "./get-knight-moves.js";
+import mergeSort from "./merge-sort.js";
+import removeOverTheBoardMoves from "./remove-over-the-board-moves.js";
+import translateAllCoordinatesToNumbers from "./translate-all-coordinates-to-numbers.js";
+import chessCoordinates from "./chess-coordinates.js";
 
 const bst = binarySearchTree();
 
