@@ -8,27 +8,32 @@ const bst = binarySearchTree();
 
 const createPath = (from, to) => {
   const chessGraph = chessBoardGraph();
-  let curr = translate2DIntoNum(from);
-  let newLoc = translate2DIntoNum(to);
+  const current = translate2DIntoNum(from);
+  const newCurr = translate2DIntoNum(to);
 
-  let queue = [];
-  queue.push(curr);
-  let broadPath = [];
+  const queue = [];
+  const path = [];
+  queue.push(current);
 
   while (queue.length !== 0) {
     let front = queue.at(0);
+    let bstMoves = chessGraph.at(front);
+    let movesArr = bst.inOrder(bstMoves);
 
-    let currSquare = chessGraph[front];
-    let moves = bst.levelOrder(currSquare);
-    let indexes = moves.map((element) => queue.push(element));
+    movesArr.forEach((element) => {
+      let e = element;
+      queue.push(e);
+    });
 
-    broadPath.push({ position: queue.shift(), moves });
+    path.push({ position: front, moves: movesArr });
 
-    if (front === newLoc) {
-      return broadPath;
+    if (bst.find(bstMoves, newCurr)) {
+      return path;
     }
+
+    queue.shift();
   }
-  return broadPath;
+
 };
 
-console.log(createPath([3, 3], [4, 3]), translate2DIntoNum([4, 3]));
+console.log(createPath([0, 1], [0, 0]));
